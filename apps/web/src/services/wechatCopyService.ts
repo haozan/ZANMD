@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import mermaid from "mermaid";
-import { processHtml, createMarkdownParser } from "@wemd/core";
+import { processHtml, createMarkdownParser } from "@hongzhong-paiban/core";
 import katexCss from "katex/dist/katex.min.css?raw";
 import { loadMathJax } from "../utils/mathJaxLoader";
 import { hasMathFormula } from "../utils/katexRenderer";

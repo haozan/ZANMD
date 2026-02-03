@@ -58,7 +58,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 color: "#111827",
               }}
             >
-              WeMD 遇到错误
+              红中排版遇到错误
             </h1>
             <p
               style={{

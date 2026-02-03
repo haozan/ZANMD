@@ -5,7 +5,7 @@ import {
   type CustomTheme,
   type DesignerVariables,
 } from "./themes/builtInThemes";
-import { convertCssToWeChatDarkMode } from "@wemd/core";
+import { convertCssToWeChatDarkMode } from "@hongzhong-paiban/core";
 import { generateCSS } from "../components/Theme/ThemeDesigner/generateCSS";
 
 // 深色模式 CSS 转换缓存

@@ -10,9 +10,19 @@ const packageJson = JSON.parse(
 
 export default defineConfig({
   base: "./",
+  server: {
+    host: "0.0.0.0",
+    hmr: {
+      clientPort: 5173,
+    },
+    allowedHosts: [".clackypaas.com"],
+  },
   resolve: {
     alias: {
-      "@wemd/core": path.resolve(__dirname, "../../packages/core/src/index.ts"),
+      "@hongzhong-paiban/core": path.resolve(
+        __dirname,
+        "../../packages/core/src/index.ts",
+      ),
     },
   },
   plugins: [react()],

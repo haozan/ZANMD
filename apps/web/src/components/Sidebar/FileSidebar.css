@@ -362,7 +362,7 @@
   text-align: left;
   font-size: 13px;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--text-secondary);
   cursor: pointer;
   transition:
@@ -452,7 +452,7 @@
 .fs-confirm-actions button {
   min-width: 92px;
   height: 36px;
-  border-radius: 18px;
+  border-radius: 0;
   border: 1px solid var(--border-light);
   background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-primary);
@@ -594,7 +594,7 @@
     var(--tree-line-color) calc(100% - 10px),
     transparent
   );
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .fs-folder-children .fs-item,
@@ -609,7 +609,7 @@
   left: calc(var(--tree-line-x) - var(--tree-indent));
   width: 6px;
   height: 6px;
-  border-radius: 999px;
+  border-radius: 0;
   background-color: var(--tree-line-dot);
   transition:
     background-color 0.2s,
@@ -695,7 +695,7 @@
   text-align: left;
   font-size: 13px;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--text-secondary);
   cursor: pointer;
   transition:

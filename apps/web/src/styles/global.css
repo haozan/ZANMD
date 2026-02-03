@@ -84,7 +84,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 0;
   transition: background 0.2s;
 }
 
@@ -103,7 +103,7 @@ button {
   font-family: var(--font-sans);
   cursor: pointer;
   border: var(--border-width) solid transparent;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   outline: none;
   background: var(--bg-secondary);
   color: var(--text-primary);

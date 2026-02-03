@@ -22,7 +22,7 @@ const GithubIcon = ({ size = 24 }: { size?: number | string }) => (
 export function SidebarFooter() {
   const uiTheme = useUITheme((state) => state.theme);
   const logoSrc =
-    uiTheme === "dark" ? "/favicon-light.svg" : "/favicon-dark.svg";
+    uiTheme === "dark" ? "/favicon-light.png" : "/favicon-dark.png";
 
   return (
     <div className="sidebar-footer">
@@ -31,7 +31,7 @@ export function SidebarFooter() {
           <img src={logoSrc} alt="Logo" />
         </div>
         <div className="footer-info">
-          <span className="footer-name">WeMD</span>
+          <span className="footer-name">红中排版</span>
           <span className="footer-version">v{__APP_VERSION__}</span>
         </div>
       </div>

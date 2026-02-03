@@ -193,7 +193,7 @@ themeName: ${themeState.themeName}
 
   const uiTheme = useUITheme((state) => state.theme);
   const logoSrc =
-    uiTheme === "dark" ? "/favicon-light.svg" : "/favicon-dark.svg";
+    uiTheme === "dark" ? "/favicon-light.png" : "/favicon-dark.png";
 
   return (
     <aside className="history-sidebar">

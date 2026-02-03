@@ -40,11 +40,11 @@ export function UpdateModal({
         </button>
 
         <div className="update-modal-icon">
-          <img src="/favicon-dark.svg" alt="WeMD" width={64} height={64} />
+          <img src="/favicon-dark.png" alt="红中排版" width={64} height={64} />
         </div>
 
         <h2 className="update-modal-title">发现新版本</h2>
-        <p className="update-modal-version">WeMD {latestVersion} 已发布</p>
+        <p className="update-modal-version">红中排版 {latestVersion} 已发布</p>
 
         {releaseNotes && (
           <button

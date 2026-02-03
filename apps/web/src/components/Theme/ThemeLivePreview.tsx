@@ -4,7 +4,7 @@ import {
   createMarkdownParser,
   processHtml,
   convertCssToWeChatDarkMode,
-} from "@wemd/core";
+} from "@hongzhong-paiban/core";
 import { useUITheme } from "../../hooks/useUITheme";
 import { useEditorStore } from "../../store/editorStore";
 import type { DesignerVariables } from "./ThemeDesigner/types";
@@ -32,7 +32,7 @@ const PREVIEW_MARKDOWN = `# 一级标题示例
 
 ### 三级标题
 
-这里演示脚注的使用：[WeChat Markdown](https://github.com/tenngoxars/WeMD "WeMD 是一款专为公众号设计的编辑器") 可以极大提升排版效率。
+这里演示脚注的使用：[WeChat Markdown](https://github.com/tenngoxars/WeMD "红中排版是一款专为公众号设计的编辑器") 可以极大提升排版效率。
 
 > [!TIP]
 > 这是一个提示块示例。支持切换"默认彩色"或"跟随主题色"风格，让排版更统一。
@@ -69,7 +69,7 @@ flowchart TD
   Reject --> End
 \`\`\`
 
-![WeMD 示例图片：不仅支持常规排版，更可以深度定制每一个细节。](https://img.wemd.app/example.jpg)
+![红中排版示例图片：不仅支持常规排版，更可以深度定制每一个细节。](https://img.wemd.app/example.jpg)
 `;
 
 interface ThemeLivePreviewProps {

@@ -1,6 +1,6 @@
 {
-  "appId": "com.wemd.app",
-  "productName": "WeMD",
+  "appId": "com.hongzhongpaiban.app",
+  "productName": "红中排版",
   "directories": {
     "output": "release"
   },
@@ -27,7 +27,7 @@
     "icon": "assets/icon.icns"
   },
   "dmg": {
-    "title": "WeMD ${version}",
+    "title": "红中排版 ${version}",
     "backgroundColor": "#ffffff",
     "icon": "assets/icon.icns",
     "contents": [
@@ -63,6 +63,6 @@
     "target": ["AppImage", "deb"],
     "category": "Office",
     "icon": "assets/icon.png",
-    "maintainer": "WeMD Team"
+    "maintainer": "红中排版 Team"
   }
 }

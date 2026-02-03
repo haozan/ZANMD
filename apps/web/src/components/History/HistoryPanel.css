@@ -372,7 +372,7 @@
 .history-confirm-actions button {
   min-width: 92px;
   height: 36px;
-  border-radius: 18px;
+  border-radius: 0;
   border: 1px solid var(--border-light);
   background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   color: var(--text-primary);

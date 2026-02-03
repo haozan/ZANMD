@@ -1,10 +1,10 @@
 {
-  "name": "wemd-electron",
+  "name": "hongzhong-paiban-electron",
   "version": "1.2.4",
-  "description": "WeMD - 更优雅的 Markdown 公众号排版工具",
+  "description": "红中排版 - 更优雅的 Markdown 公众号排版工具",
   "main": "dist/main.js",
   "homepage": "https://wemd.app",
-  "author": "WeMD Team",
+  "author": "红中排版 Team",
   "scripts": {
     "build": "rimraf dist && tsc",
     "dev": "rimraf dist && tsc && electron .",

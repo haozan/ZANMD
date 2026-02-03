@@ -40,11 +40,11 @@ body,
 
   /* Borders & Radius */
   --ui-border-width: 1px;
-  --ui-radius-sm: 8px;
-  --ui-radius-md: 12px;
-  --ui-radius-lg: 16px;
-  --ui-radius-xl: 24px;
-  --ui-radius-pill: 999px;
+  --ui-radius-sm: 0;
+  --ui-radius-md: 0;
+  --ui-radius-lg: 0;
+  --ui-radius-xl: 0;
+  --ui-radius-pill: 0;
 
   /* Shadows */
   --ui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -132,11 +132,11 @@ body,
 
   /* Borders & Radius - 保持与默认主题一致 */
   --ui-border-width: 1px;
-  --ui-radius-sm: 8px;
-  --ui-radius-md: 12px;
-  --ui-radius-lg: 16px;
-  --ui-radius-xl: 24px;
-  --ui-radius-pill: 999px;
+  --ui-radius-sm: 0;
+  --ui-radius-md: 0;
+  --ui-radius-lg: 0;
+  --ui-radius-xl: 0;
+  --ui-radius-pill: 0;
 
   /* Shadows - 深色模式阴影 */
   --ui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
