@@ -214,8 +214,8 @@ function App() {
           />
         </Suspense>
       )}
-      {/* 只在存储上下文完全就绪且确认为 IndexedDB 模式时才渲染 HistoryManager */}
-      {!isElectron && ready && storageType === "indexeddb" && (
+      {/* 只在存储上下文完全就绪且确认为 cloud 模式时才渲染 HistoryManager */}
+      {!isElectron && ready && storageType === "cloud" && (
         <Suspense fallback={null}>
           <HistoryManager />
         </Suspense>
@@ -300,7 +300,7 @@ function App() {
               {/* 存储未就绪或文件/历史加载中显示 loading */}
               {!ready ||
               fileLoading ||
-              (historyLoading && !isElectron && storageType === "indexeddb") ? (
+              (historyLoading && !isElectron && storageType === "cloud") ? (
                 <div className="workspace-loading">
                   <Loader2 className="animate-spin" size={24} />
                   <p>正在加载文章</p>
@@ -312,7 +312,7 @@ function App() {
             <div className="preview-pane">
               {!ready ||
               fileLoading ||
-              (historyLoading && !isElectron && storageType === "indexeddb") ? (
+              (historyLoading && !isElectron && storageType === "cloud") ? (
                 <div className="workspace-loading">
                   <Loader2 className="animate-spin" size={24} />
                   <p>正在加载文章</p>

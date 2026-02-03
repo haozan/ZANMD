@@ -1,5 +1,6 @@
-<p align="center">
-  <img src="apps/web/public/favicon-dark.svg" width="80" height="80" alt="WeMD Logo" />
+test@example.com<p align="center">
+<img src="apps/web/public/favicon-dark.svg" width="80" height="80" alt="WeMD Logo" />
+
 </p>
 
 <h1 align="center">WeMD</h1>

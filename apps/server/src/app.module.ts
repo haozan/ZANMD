@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UploadModule } from './upload/upload.module';
+import { AuthModule } from './auth/auth.module';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
@@ -10,6 +12,8 @@ import { UploadModule } from './upload/upload.module';
       isGlobal: true,
     }),
     UploadModule,
+    AuthModule,
+    DocumentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

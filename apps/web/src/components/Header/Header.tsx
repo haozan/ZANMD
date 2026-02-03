@@ -1,18 +1,25 @@
 import { useState, useEffect, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 import { useEditorStore } from "../../store/editorStore";
+import { useAuthStore } from "../../store/authStore";
 import "./Header.css";
 
 const ThemePanel = lazy(() =>
   import("../Theme/ThemePanel").then((m) => ({ default: m.ThemePanel })),
 );
-const StorageModeSelector = lazy(() =>
-  import("../StorageModeSelector/StorageModeSelector").then((m) => ({
-    default: m.StorageModeSelector,
-  })),
-);
 const ImageHostSettings = lazy(() =>
   import("../Settings/ImageHostSettings").then((m) => ({
     default: m.ImageHostSettings,
+  })),
+);
+const AuthModal = lazy(() =>
+  import("../Auth/AuthModal").then((m) => ({
+    default: m.AuthModal,
+  })),
+);
+const UserMenu = lazy(() =>
+  import("../Auth/UserMenu").then((m) => ({
+    default: m.UserMenu,
   })),
 );
 import {
@@ -101,15 +108,23 @@ const WindowControls = ({ fixed = false }: { fixed?: boolean }) => {
 };
 
 export function Header() {
+  const navigate = useNavigate();
   const { copyToWechat } = useEditorStore();
+  const { isAuthenticated } = useAuthStore();
   const [showThemePanel, setShowThemePanel] = useState(false);
-  const [showStorageModal, setShowStorageModal] = useState(false);
   const [showImageHostModal, setShowImageHostModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
   const uiTheme = useUITheme((state) => state.theme);
   const setTheme = useUITheme((state) => state.setTheme);
   const isStructuralismUI = uiTheme === "dark";
 
   const { isElectron, isWindows, platform } = useWindowControls();
+
+  // 调试日志：监听showAuthModal状态变化
+  useEffect(() => {
+    console.log("showAuthModal 状态变化:", showAuthModal);
+  }, [showAuthModal]);
 
   // 自动隐藏标题栏状态
   const [autoHide, setAutoHide] = useState(() => {
@@ -167,13 +182,6 @@ export function Header() {
             label={uiTheme === "dark" ? "亮色模式" : "暗色模式"}
             onClick={() => setTheme(uiTheme === "dark" ? "default" : "dark")}
           />
-          {!isElectron && (
-            <FloatingToolbarButton
-              icon={<Layers size={18} strokeWidth={2} />}
-              label="存储模式"
-              onClick={() => setShowStorageModal(true)}
-            />
-          )}
           <FloatingToolbarButton
             icon={<ImageIcon size={18} strokeWidth={2} />}
             label="图床设置"
@@ -198,7 +206,11 @@ export function Header() {
         style={headerStyle}
       >
         <div className="header-left">
-          <div className="logo">
+          <div
+            className="logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          >
             {isStructuralismUI ? (
               <StructuralismLogoMark />
             ) : (
@@ -226,15 +238,6 @@ export function Header() {
                 <Moon size={18} strokeWidth={2} />
               )}
             </button>
-            {!isElectron && (
-              <button
-                className="btn-secondary"
-                onClick={() => setShowStorageModal(true)}
-              >
-                <Layers size={18} strokeWidth={2} />
-                <span>存储模式</span>
-              </button>
-            )}
             <button
               className="btn-secondary"
               onClick={() => setShowImageHostModal(true)}
@@ -249,6 +252,36 @@ export function Header() {
               <Palette size={18} strokeWidth={2} />
               <span>主题管理</span>
             </button>
+
+            {/* 用户认证 */}
+            {isAuthenticated ? (
+              <Suspense fallback={null}>
+                <UserMenu />
+              </Suspense>
+            ) : (
+              <>
+                <button
+                  className="btn-secondary"
+                  onClick={() => {
+                    console.log("登录按钮被点击");
+                    setAuthMode("login");
+                    setShowAuthModal(true);
+                  }}
+                >
+                  <span>登录</span>
+                </button>
+                <button
+                  className="btn-secondary"
+                  onClick={() => {
+                    console.log("注册按钮被点击");
+                    setAuthMode("register");
+                    setShowAuthModal(true);
+                  }}
+                >
+                  <span>注册</span>
+                </button>
+              </>
+            )}
 
             <button className="btn-primary" onClick={copyToWechat}>
               <Send size={18} strokeWidth={2} />
@@ -278,22 +311,6 @@ export function Header() {
       </Suspense>
 
       <Modal
-        open={showStorageModal}
-        onClose={() => setShowStorageModal(false)}
-        title="选择存储模式"
-      >
-        <Suspense
-          fallback={
-            <div style={{ padding: "20px", textAlign: "center" }}>
-              loading...
-            </div>
-          }
-        >
-          <StorageModeSelector />
-        </Suspense>
-      </Modal>
-
-      <Modal
         open={showImageHostModal}
         onClose={() => setShowImageHostModal(false)}
         title="图床设置"
@@ -309,6 +326,17 @@ export function Header() {
           <ImageHostSettings />
         </Suspense>
       </Modal>
+
+      {/* 登录/注册模态框 */}
+      {showAuthModal && (
+        <Suspense fallback={null}>
+          <AuthModal
+            isOpen={showAuthModal}
+            onClose={() => setShowAuthModal(false)}
+            initialMode={authMode}
+          />
+        </Suspense>
+      )}
     </>
   );
 }

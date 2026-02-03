@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试登录页面 - 纯HTML版本</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    
+    .version-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    label {
+      display: block;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    
+    .input-type-tag {
+      background: #10b981;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-left: 8px;
+      font-weight: normal;
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #10b981;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    input:disabled {
+      background: #f3f4f6;
+      cursor: not-allowed;
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-top: 10px;
+    }
+    
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+    
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .error {
+      background: #fee2e2;
+      border: 1px solid #ef4444;
+      color: #991b1b;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .success {
+      background: #d1fae5;
+      border: 1px solid #10b981;
+      color: #065f46;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .info {
+      background: #f0f9ff;
+      border-left: 4px solid #0ea5e9;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: #0369a1;
+    }
+    
+    .info strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    
+    .timestamp {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.75rem;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .log {
+      background: #1f2937;
+      color: #10b981;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .log-entry {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="version-badge">v5.0-FINAL-TEST</div>
+    
+    <h1>🔐 测试登录</h1>
+    <p class="subtitle">纯HTML版本 - 无React - 无缓存</p>
+    
+    <div id="message"></div>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">
+          邮箱
+          <span class="input-type-tag">type="text"</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="text"
+          placeholder="test@example.com"
+          value="test@example.com"
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="请输入密码"
+          value="123456"
+        />
+      </div>
+      
+      <button type="submit" id="submitBtn">
+        登录
+      </button>
+    </form>
+    
+    <div class="info">
+      <strong>💡 测试账号</strong>
+      <div>邮箱: test@example.com</div>
+      <div>密码: 123456</div>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <div class="timestamp">
+      页面加载时间: <span id="loadTime"></span>
+    </div>
+  </div>
+  
+  <script>
+    // 显示加载时间
+    document.getElementById('loadTime').textContent = new Date().toLocaleString('zh-CN');
+    
+    // 日志功能
+    const logElement = document.getElementById('log');
+    function log(message, color = '#10b981') {
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.style.color = color;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logElement.appendChild(entry);
+      logElement.scrollTop = logElement.scrollHeight;
+      console.log(message);
+    }
+    
+    // 显示消息
+    function showMessage(message, type = 'error') {
+      const messageDiv = document.getElementById('message');
+      messageDiv.className = type;
+      messageDiv.textContent = message;
+      messageDiv.style.display = 'block';
+    }
+    
+    // 初始化日志
+    log('✅ 页面加载完成', '#10b981');
+    log('✅ 邮箱输入框类型: ' + document.getElementById('email').type, '#10b981');
+    log('✅ 这是纯HTML页面，不依赖React', '#10b981');
+    
+    // 表单提交
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      log('🔵 表单提交开始', '#3b82f6');
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = document.getElementById('submitBtn');
+      
+      log('📧 邮箱: ' + email, '#3b82f6');
+      log('🔑 密码长度: ' + password.length, '#3b82f6');
+      
+      // 简单验证
+      if (!email || !email.includes('@')) {
+        showMessage('请输入有效的邮箱地址', 'error');
+        log('❌ 验证失败: 邮箱格式错误', '#ef4444');
+        return;
+      }
+      
+      if (!password || password.length < 6) {
+        showMessage('密码至少需要6个字符', 'error');
+        log('❌ 验证失败: 密码太短', '#ef4444');
+        return;
+      }
+      
+      log('✅ 客户端验证通过', '#10b981');
+      
+      // 禁用按钮
+      submitBtn.disabled = true;
+      submitBtn.textContent = '登录中...';
+      
+      try {
+        log('🌐 发起登录请求: http://localhost:4000/auth/login', '#3b82f6');
+        
+        const response = await fetch('http://localhost:4000/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        
+        log('📡 响应状态: ' + response.status, response.ok ? '#10b981' : '#ef4444');
+        
+        const data = await response.json();
+        log('📦 响应数据: ' + JSON.stringify(data).substring(0, 100), '#3b82f6');
+        
+        if (!response.ok) {
+          throw new Error(data.message || '登录失败');
+        }
+        
+        showMessage('✅ 登录成功！用户: ' + data.user.username, 'success');
+        log('✅ 登录成功! 用户ID: ' + data.user.id, '#10b981');
+        log('✅ Token: ' + data.token.substring(0, 30) + '...', '#10b981');
+        
+      } catch (error) {
+        log('❌ 登录失败: ' + error.message, '#ef4444');
+        showMessage('登录失败: ' + error.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '登录';
+      }
+    });
+    
+    // 监听输入变化
+    document.getElementById('email').addEventListener('input', function(e) {
+      log('⌨️ 邮箱输入: ' + e.target.value, '#6366f1');
+    });
+    
+    document.getElementById('password').addEventListener('input', function(e) {
+      log('⌨️ 密码输入: ' + e.target.value.length + ' 个字符', '#6366f1');
+    });
+    
+    // 检测是否有HTML5验证触发
+    document.getElementById('email').addEventListener('invalid', function(e) {
+      log('🚨 检测到HTML5验证触发！这不应该发生！', '#ef4444');
+      log('🚨 验证消息: ' + e.target.validationMessage, '#ef4444');
+      alert('检测到浏览器HTML5验证！\n\n这说明有问题！\n\n验证消息: ' + e.target.validationMessage);
+    });
+  </script>
+</body>
+</html>

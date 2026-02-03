@@ -20,50 +20,5 @@ const GithubIcon = ({ size = 24 }: { size?: number | string }) => (
 );
 
 export function SidebarFooter() {
-  const uiTheme = useUITheme((state) => state.theme);
-  const logoSrc =
-    uiTheme === "dark" ? "/favicon-light.png" : "/favicon-dark.png";
-
-  return (
-    <div className="sidebar-footer">
-      <div className="footer-brand">
-        <div className="footer-logo">
-          <img src={logoSrc} alt="Logo" />
-        </div>
-        <div className="footer-info">
-          <span className="footer-name">红中排版</span>
-          <span className="footer-version">v{__APP_VERSION__}</span>
-        </div>
-      </div>
-      <div className="footer-links">
-        <a
-          href="https://github.com/tenngoxars/WeMD"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-tooltip="GitHub 仓库"
-          aria-label="GitHub 仓库"
-        >
-          <GithubIcon size={16} />
-        </a>
-        <a
-          href="https://wemd.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-tooltip="官方网站"
-          aria-label="官方网站"
-        >
-          <Globe size={16} />
-        </a>
-        <a
-          href="https://wemd.app/docs"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-tooltip="帮助文档"
-          aria-label="帮助文档"
-        >
-          <BookOpen size={16} />
-        </a>
-      </div>
-    </div>
-  );
+  return null;
 }

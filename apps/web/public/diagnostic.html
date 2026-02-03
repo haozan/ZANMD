@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>诊断工具 - 检查代码版本</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    
+    .version {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 30px 0;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .build-time {
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+    
+    .status {
+      background: #f0f9ff;
+      border-left: 4px solid #0ea5e9;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .status h2 {
+      color: #0369a1;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .status p {
+      color: #0c4a6e;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    
+    .test-input {
+      margin: 30px 0;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 12px;
+    }
+    
+    .test-input label {
+      display: block;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .test-input input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #10b981;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .test-input input:focus {
+      outline: none;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    .input-type {
+      background: #10b981;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    
+    .checklist {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    .checklist h2 {
+      color: #b45309;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .checklist li {
+      color: #78350f;
+      padding: 8px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+    
+    .checklist li:before {
+      content: "□";
+      position: absolute;
+      left: 0;
+      font-size: 1.5rem;
+      color: #f59e0b;
+    }
+    
+    .error-example {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    .error-example h2 {
+      color: #991b1b;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .error-text {
+      background: #dc2626;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    
+    .success-box {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+    
+    .success-box h2 {
+      color: #166534;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .timestamp {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 诊断工具</h1>
+    <p style="color: #6b7280; margin-bottom: 20px;">检查您是否加载了最新版本的代码</p>
+    
+    <div class="version">
+      v5.0-FINAL
+    </div>
+    
+    <div class="build-time">
+      构建时间: 2025-01-16 11:35
+    </div>
+    
+    <div class="status">
+      <h2>✅ 如果您能看到这个页面</h2>
+      <p><strong>说明：</strong>您的浏览器可以加载新文件</p>
+      <p><strong>问题：</strong>可能是 React 组件被缓存了</p>
+    </div>
+    
+    <div class="test-input">
+      <label>
+        测试邮箱输入框 
+        <span class="input-type">type="text"</span>
+      </label>
+      <input 
+        id="test-email"
+        type="text" 
+        placeholder="这是一个纯文本输入框，不会验证格式"
+        style="border: 2px solid #10b981"
+      />
+      <p style="margin-top: 10px; color: #059669; font-size: 0.9rem;">
+        ✓ 这个输入框使用 type="text"，任何内容都可以输入
+      </p>
+    </div>
+    
+    <div class="error-example">
+      <h2>❌ 如果看到此错误消息</h2>
+      <div class="error-text">
+        The string did not match the expected pattern.
+      </div>
+      <p style="margin-top: 15px; color: #7f1d1d;">
+        <strong>说明：</strong>您的浏览器还在使用旧的缓存代码，旧代码中的邮箱输入框是 type="email"
+      </p>
+    </div>
+    
+    <div class="checklist">
+      <h2>📋 检查清单</h2>
+      <ul>
+        <li>登录窗口右上角是否有紫色 "v5.0-FINAL" 标签？</li>
+        <li>邮箱输入框是否有绿色边框？</li>
+        <li>邮箱标签是否写着 "邮箱 (纯文本输入)"？</li>
+        <li>窗口底部是否显示 "Build: 2025-01-16 11:35"？</li>
+      </ul>
+      <p style="margin-top: 15px; color: #92400e; font-weight: 600;">
+        如果以上都没看到，请继续清理缓存！
+      </p>
+    </div>
+    
+    <div class="success-box">
+      <h2>✨ 清理缓存步骤（iPad Safari）</h2>
+      <p style="color: #166534; line-height: 1.8;">
+        1. 打开 <strong>设置</strong> App<br>
+        2. 找到 <strong>Safari</strong><br>
+        3. 点击 <strong>清除历史记录与网站数据</strong><br>
+        4. 确认清除<br>
+        5. <strong>完全关闭</strong> Safari（从底部上滑，划掉 Safari 卡片）<br>
+        6. 等待 10 秒<br>
+        7. 重新打开 Safari 访问网站
+      </p>
+    </div>
+    
+    <button onclick="testInput()">
+      测试输入框（点击查看效果）
+    </button>
+    
+    <div class="timestamp">
+      页面生成时间: <span id="current-time"></span>
+    </div>
+  </div>
+  
+  <script>
+    // 显示当前时间
+    document.getElementById('current-time').textContent = new Date().toLocaleString('zh-CN');
+    
+    // 测试输入框
+    function testInput() {
+      const input = document.getElementById('test-email');
+      const testValues = [
+        'test',
+        'abc',
+        '123',
+        'test@example.com',
+        'not-an-email',
+        '!!@@##'
+      ];
+      
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < testValues.length) {
+          input.value = testValues[index];
+          input.style.transform = 'scale(1.05)';
+          setTimeout(() => {
+            input.style.transform = 'scale(1)';
+          }, 200);
+          index++;
+        } else {
+          clearInterval(interval);
+          input.value = '';
+          input.placeholder = '✓ 测试完成！任何内容都可以输入，不会报错';
+          alert('✅ 测试完成！\n\n这个输入框使用 type="text"，不会触发任何验证错误。\n\n如果您在登录页面遇到 "The string did not match the expected pattern" 错误，说明您的浏览器还在使用旧代码！\n\n请清除 Safari 缓存后重试。');
+        }
+      }, 500);
+    }
+    
+    // 输入事件监听
+    document.getElementById('test-email').addEventListener('input', function(e) {
+      console.log('✅ 输入值:', e.target.value);
+      console.log('✅ 输入框类型:', e.target.type);
+      console.log('✅ 这是纯文本输入框，不会验证格式');
+    });
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-export type StorageType = 'indexeddb' | 'filesystem';
+export type StorageType = "indexeddb" | "filesystem" | "cloud";
 
 export interface FileItem {
   path: string;
