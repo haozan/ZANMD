@@ -105,10 +105,8 @@ export function LandingPage() {
               height={80}
             />
           </div>
-          <h1 className="hero-title">
-            红中排版
-            <span className="hero-subtitle">篇篇爆红</span>
-          </h1>
+          <h1 className="hero-title">红中排版 篇篇爆红</h1>
+          <h2 className="hero-subtitle">公众号排版运营神器</h2>
           <p className="hero-description">
             专业的公众号 Markdown 排版工具，让每一篇文章都能获得最佳呈现效果
           </p>
